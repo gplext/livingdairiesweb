@@ -1,0 +1,43 @@
+<aside class="sidebar">
+  <div class="sidebar-brand">
+    <img src="/images/logo.jpg" alt="Living Dairies" class="sidebar-logo" />
+    <div>
+      <div class="sidebar-title">Living Dairies</div>
+      <div class="sidebar-sub">Admin Console</div>
+    </div>
+  </div>
+
+  <nav class="sidebar-nav">
+    <div class="nav-section">Overview</div>
+    <a href="/admin" class="nav-item <%= page === 'dashboard' ? 'active' : '' %>">
+      <span class="dot dot-red"></span> Dashboard
+    </a>
+
+    <div class="nav-section">Operations</div>
+    <a href="/admin/orders" class="nav-item <%= page === 'orders' ? 'active' : '' %>">
+      <span class="dot dot-blue"></span> Active Orders
+    </a>
+    <a href="/admin/orders/completed" class="nav-item <%= page === 'completed' ? 'active' : '' %>">
+      <span class="dot dot-green"></span> Completed
+    </a>
+
+    <div class="nav-section">Catalog</div>
+    <a href="/admin/products" class="nav-item <%= page === 'products' ? 'active' : '' %>">
+      <span class="dot dot-red"></span> Products
+    </a>
+  </nav>
+
+  <div class="sidebar-foot">
+    <div class="user-chip">
+      <div class="user-avatar"><%= username.charAt(0).toUpperCase() %></div>
+      <div>
+        <div class="user-name"><%= username %></div>
+        <div class="user-role">Administrator</div>
+      </div>
+    </div>
+    <form action="/admin/logout" method="post">
+      <button type="submit" class="logout-btn">Logout →</button>
+    </form>
+    <a href="/" target="_blank" class="view-site">View Public Site ↗</a>
+  </div>
+</aside>

@@ -1,0 +1,58 @@
+<% const title = 'Login' %>
+<%- include('_head', { title }) %>
+<body class="login-body">
+
+<div class="login-shell">
+  <div class="login-art">
+    <div class="login-art-inner">
+      <div class="login-logo">
+        <img src="/images/logo.jpg" alt="Living Dairies" class="login-logo-img" />
+      </div>
+      <h1 class="login-headline">
+        Pure milk,<br>
+        <span class="italic">managed well.</span>
+      </h1>
+      <p class="login-sub">Sign in to manage your dairy operations — orders, products, and growth.</p>
+      <div class="login-meta">
+        <div class="meta-item">
+          <div class="meta-num">1000+</div>
+          <div class="meta-label">Litres / day</div>
+        </div>
+        <div class="meta-item">
+          <div class="meta-num">450+</div>
+          <div class="meta-label">Customers</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="login-form-wrap">
+    <div class="login-form">
+      <span class="eyebrow">— Admin Console</span>
+      <h2 class="login-title">Welcome back.</h2>
+      <p class="login-desc">Enter your credentials to continue.</p>
+
+      <%- include('_flash', { flash: typeof flash !== 'undefined' ? flash : null }) %>
+
+      <form action="/admin/login" method="post" class="form">
+        <div class="form-group">
+          <label for="username">Username</label>
+          <input type="text" name="username" id="username" autocomplete="username" required autofocus />
+        </div>
+        <div class="form-group">
+          <label for="password">Password</label>
+          <input type="password" name="password" id="password" autocomplete="current-password" required />
+        </div>
+        <button type="submit" class="btn btn-primary btn-block">Sign In →</button>
+      </form>
+
+      <div class="login-hint">
+        <strong>Default credentials:</strong> admin / dairies123<br>
+        <span class="warn">⚠ Change immediately in production via .env</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

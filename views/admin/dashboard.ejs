@@ -1,0 +1,131 @@
+<% const title = 'Dashboard' %>
+<%- include('_head', { title }) %>
+<body>
+
+<div class="layout">
+  <%- include('_sidebar') %>
+
+  <main class="main">
+    <header class="page-head">
+      <div>
+        <span class="eyebrow">— Overview</span>
+        <h1 class="page-h1">Dashboard</h1>
+      </div>
+      <div class="page-head-meta">
+        <span class="badge badge-live"><span class="badge-dot"></span> Live</span>
+        <span class="muted"><%= new Date().toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) %></span>
+      </div>
+    </header>
+
+    <%- include('_flash', { flash: typeof flash !== 'undefined' ? flash : null }) %>
+
+    <!-- Stat cards -->
+    <section class="stat-row">
+      <div class="metric metric-red">
+        <div class="metric-label">Total Orders</div>
+        <div class="metric-value"><%= stats.total.toLocaleString() %></div>
+        <div class="metric-foot">All time</div>
+      </div>
+      <div class="metric metric-blue">
+        <div class="metric-label">Pending</div>
+        <div class="metric-value"><%= stats.pending %></div>
+        <div class="metric-foot">Awaiting dispatch</div>
+      </div>
+      <div class="metric metric-amber">
+        <div class="metric-label">In Delivery</div>
+        <div class="metric-value"><%= stats.inDelivery %></div>
+        <div class="metric-foot">On the way</div>
+      </div>
+      <div class="metric metric-green">
+        <div class="metric-label">Completed</div>
+        <div class="metric-value"><%= stats.completed.toLocaleString() %></div>
+        <div class="metric-foot">Delivered</div>
+      </div>
+      <div class="metric metric-dark">
+        <div class="metric-label">Revenue (Done)</div>
+        <div class="metric-value">Rs <%= Math.round(stats.revenue).toLocaleString() %></div>
+        <div class="metric-foot">From completed orders</div>
+      </div>
+    </section>
+
+    <!-- Orders by month chart -->
+    <section class="panel">
+      <div class="panel-head">
+        <div>
+          <span class="eyebrow">— Trend</span>
+          <h2 class="panel-title">Orders by month</h2>
+        </div>
+        <span class="muted">Last <%= byMonth.length %> month<%= byMonth.length === 1 ? '' : 's' %></span>
+      </div>
+
+      <% if (byMonth.length === 0) { %>
+        <div class="empty">
+          <div class="empty-icon">📭</div>
+          <p>No orders yet. Once orders come in, they'll appear here.</p>
+        </div>
+      <% } else {
+           const maxCount = Math.max(...byMonth.map(m => m.count), 1);
+      %>
+        <div class="chart">
+          <% byMonth.forEach(function(m) {
+               const heightPct = Math.max((m.count / maxCount) * 100, 4);
+               const [year, mo] = m.month.split('-');
+               const monthName = new Date(parseInt(year), parseInt(mo) - 1, 1).toLocaleString('en-US', { month: 'short' });
+          %>
+            <div class="bar-col">
+              <div class="bar-track">
+                <div class="bar-value"><%= m.count %></div>
+                <div class="bar-fill" style="height: <%= heightPct %>%"></div>
+              </div>
+              <div class="bar-label">
+                <div class="bar-month"><%= monthName %></div>
+                <div class="bar-year"><%= year %></div>
+              </div>
+            </div>
+          <% }) %>
+        </div>
+
+        <div class="chart-legend">
+          <% byMonth.forEach(function(m) {
+               const [year, mo] = m.month.split('-');
+               const label = new Date(parseInt(year), parseInt(mo) - 1, 1).toLocaleString('en-US', { month: 'short', year: 'numeric' });
+          %>
+            <div class="legend-row">
+              <span class="legend-month"><%= label %></span>
+              <span class="legend-count"><%= m.count %> orders</span>
+              <span class="legend-rev">Rs <%= Math.round(m.revenue).toLocaleString() %></span>
+            </div>
+          <% }) %>
+        </div>
+      <% } %>
+    </section>
+
+    <!-- Quick links -->
+    <section class="quick-row">
+      <a href="/admin/orders" class="quick-card">
+        <div class="quick-icon quick-icon-blue">→</div>
+        <div>
+          <div class="quick-title">Manage Active Orders</div>
+          <div class="quick-sub">Update status, view customer details</div>
+        </div>
+      </a>
+      <a href="/admin/products" class="quick-card">
+        <div class="quick-icon quick-icon-red">+</div>
+        <div>
+          <div class="quick-title">Add a Product</div>
+          <div class="quick-sub">Expand your catalog</div>
+        </div>
+      </a>
+      <a href="/admin/orders/completed" class="quick-card">
+        <div class="quick-icon quick-icon-green">✓</div>
+        <div>
+          <div class="quick-title">View Completed Orders</div>
+          <div class="quick-sub">Delivery history & archive</div>
+        </div>
+      </a>
+    </section>
+  </main>
+</div>
+
+</body>
+</html>

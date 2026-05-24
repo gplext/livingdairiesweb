@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
+<meta name="theme-color" content="#B83729" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Order Milk — Living Dairies</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700&display=swap">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<nav class="nav">
+  <div class="nav-inner">
+    <a href="index.html" class="logo logo-img-wrap">
+      <img src="images/logo.jpg" alt="Living Dairies" class="logo-img" />
+      <span class="nav-tagline">Nourishing your day</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="about.html">About</a></li>
+      <li><a href="order.html" class="active">Order</a></li>
+    </ul>
+    <a href="order.html" class="nav-cta">Order Now →</a>
+  </div>
+</nav>
+
+<header class="page-header">
+  <div class="container">
+    <span class="eyebrow">— Order Online</span>
+    <h1 class="page-title">
+      Fresh milk,<br>
+      to your <span class="italic">door.</span>
+    </h1>
+    <p class="page-lede">
+      Place your order before 10 PM, and we'll deliver it before 9 AM the next morning. It's that simple.
+    </p>
+  </div>
+</header>
+
+<section class="order">
+  <div class="container order-grid">
+
+    <div id="productList">
+      <!-- product cards rendered by JS -->
+      <div class="product-card">
+        <div class="product-image" style="background:var(--cream-warm);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-style:italic;color:var(--muted);">Loading…</div>
+      </div>
+    </div>
+
+    <form class="order-form" id="orderForm">
+      <h3 class="form-title">Place Your Order</h3>
+
+      <div class="form-row">
+        <label for="productSelect">Product</label>
+        <select id="productSelect" class="select" required></select>
+      </div>
+
+      <div class="form-row">
+        <label for="qty">Quantity</label>
+        <div class="qty-control">
+          <button type="button" class="qty-btn" data-action="decrease">−</button>
+          <input type="number" id="qty" value="1" min="1" max="50" />
+          <span class="qty-unit">litres</span>
+          <button type="button" class="qty-btn" data-action="increase">+</button>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" placeholder="Your name" required />
+      </div>
+
+      <div class="form-row">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" placeholder="+92 300 0000000" required />
+      </div>
+
+      <div class="form-row">
+        <label for="address">Delivery Address</label>
+        <textarea id="address" rows="3" placeholder="House #, Street, Area, Lahore" required></textarea>
+      </div>
+
+      <div class="form-row">
+        <label for="notes">Delivery Notes (optional)</label>
+        <input type="text" id="notes" placeholder="e.g. Leave at the gate" />
+      </div>
+
+      <div class="order-summary">
+        <div class="summary-row">
+          <span>Subtotal</span>
+          <span><span id="subtotal">0</span> PKR</span>
+        </div>
+        <div class="summary-row">
+          <span>Delivery</span>
+          <span class="free">FREE</span>
+        </div>
+        <div class="summary-row total">
+          <span>Total</span>
+          <span><span id="total">0</span> PKR</span>
+        </div>
+      </div>
+
+      <button type="submit" class="btn btn-primary btn-block" id="submitBtn">Confirm Order →</button>
+      <p class="form-note">Cash on Delivery · No advance payment required</p>
+      <p id="formError" class="form-error" style="display:none;"></p>
+    </form>
+
+  </div>
+</section>
+
+<section class="how">
+  <div class="container">
+    <div class="how-header">
+      <span class="section-num">04</span>
+      <h2 class="section-title light">How it<br><span class="italic">works.</span></h2>
+    </div>
+    <div class="how-grid">
+      <div class="how-step">
+        <div class="step-num">01</div>
+        <h3>Place Your Order</h3>
+        <p>Choose your quantity, fill in your details, and confirm. Takes less than a minute.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">02</div>
+        <h3>We Milk at Dawn</h3>
+        <p>Our team starts at 4 AM. Your milk is collected, filtered, and chilled within 15 minutes.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">03</div>
+        <h3>Delivered Cold</h3>
+        <p>Between 6 AM and 9 AM, your milk arrives at your doorstep — fresh, cold, and ready.</p>
+      </div>
+      <div class="how-step">
+        <div class="step-num">04</div>
+        <h3>Enjoy. Repeat.</h3>
+        <p>Pay cash on delivery. Set up a daily subscription. Or just order whenever you need it.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container footer-grid">
+    <div>
+      <div class="logo logo-img-wrap footer-logo-wrap">
+        <img src="images/logo.jpg" alt="Living Dairies" class="logo-img logo-img-footer" />
+      </div>
+      <p class="footer-tag">Nourishing your day</p>
+    </div>
+    <div class="footer-col">
+      <h4>Visit</h4>
+      <p>5 E Main Market,<br>Gulberg, Lahore, Pakistan</p>
+    </div>
+    <div class="footer-col">
+      <h4>Contact</h4>
+      <p>(042) 35755446<br>sikandar@livingdairies.com</p>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <p>Mon–Fri · 9:30 AM – 5:00 PM<br>Delivery: 10:00 AM – 5:00 PM</p>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <span>© 2026 Living Dairies. All rights reserved.</span>
+    <span>livingdairies.com</span>
+  </div>
+</footer>
+
+<script>
+let products = [];
+let selectedProduct = null;
+
+const productList = document.getElementById('productList');
+const productSelect = document.getElementById('productSelect');
+const qty = document.getElementById('qty');
+const subtotal = document.getElementById('subtotal');
+const total = document.getElementById('total');
+const errEl = document.getElementById('formError');
+const submitBtn = document.getElementById('submitBtn');
+
+// Load products
+async function loadProducts() {
+  try {
+    const res = await fetch('/api/products');
+    const data = await res.json();
+    products = data.products || [];
+    if (products.length === 0) {
+      productList.innerHTML = '<div class="product-card"><div class="product-info"><h2 class="product-title">No products</h2><p class="product-desc">No products are currently available.</p></div></div>';
+      return;
+    }
+    renderProductCard(products[0]);
+    selectedProduct = products[0];
+    productSelect.innerHTML = products.map(p =>
+      `<option value="${p.id}">${escapeHtml(p.name)} — Rs ${p.price}/L</option>`
+    ).join('');
+    update();
+  } catch (e) {
+    productList.innerHTML = '<div class="product-card"><div class="product-info"><h2 class="product-title">Could not load</h2><p class="product-desc">Please refresh the page.</p></div></div>';
+  }
+}
+
+function escapeHtml(s) {
+  return String(s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function renderProductCard(p) {
+  productList.innerHTML = `
+    <div class="product-card">
+      <div class="product-image">
+        <img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}" onerror="this.parentElement.style.background='var(--cream-warm)'" />
+        <div class="product-badge">Today's Fresh</div>
+      </div>
+      <div class="product-info">
+        <span class="eyebrow">— Buffalo Milk · Raw · Unprocessed</span>
+        <h2 class="product-title">${escapeHtml(p.name)}</h2>
+        <p class="product-desc">${escapeHtml(p.description)}</p>
+        <div class="product-features">
+          <span>✓ Raw &amp; Unpasteurized</span>
+          <span>✓ Same-Day Delivery</span>
+          <span>✓ Glass Bottle Returnable</span>
+        </div>
+        <div class="product-price">
+          <span class="price-amount">Rs ${p.price}</span>
+          <span class="price-unit">per litre</span>
+        </div>
+      </div>
+    </div>`;
+}
+
+const update = () => {
+  let v = Math.max(1, Math.min(50, parseInt(qty.value) || 1));
+  qty.value = v;
+  const price = selectedProduct ? selectedProduct.price : 0;
+  subtotal.textContent = (v * price).toLocaleString();
+  total.textContent = (v * price).toLocaleString();
+};
+
+qty.addEventListener('input', update);
+document.querySelectorAll('.qty-btn').forEach(b => {
+  b.addEventListener('click', () => {
+    let v = parseInt(qty.value) || 1;
+    qty.value = b.dataset.action === 'increase' ? v + 1 : v - 1;
+    update();
+  });
+});
+
+productSelect.addEventListener('change', () => {
+  const id = parseInt(productSelect.value);
+  selectedProduct = products.find(p => p.id === id);
+  renderProductCard(selectedProduct);
+  update();
+});
+
+document.getElementById('orderForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  errEl.style.display = 'none';
+  submitBtn.disabled = true;
+  submitBtn.textContent = 'Placing order…';
+
+  const payload = {
+    productId: parseInt(productSelect.value),
+    quantity: parseInt(qty.value),
+    name: document.getElementById('name').value.trim(),
+    phone: document.getElementById('phone').value.trim(),
+    address: document.getElementById('address').value.trim(),
+    notes: document.getElementById('notes').value.trim() || null,
+  };
+
+  try {
+    const res = await fetch('/api/orders', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload),
+    });
+    const data = await res.json();
+    if (!res.ok || !data.ok) {
+      throw new Error(data.error || 'Failed to place order');
+    }
+    window.location.href = `/thankyou.html?id=${data.orderId}&total=${data.total}`;
+  } catch (err) {
+    errEl.textContent = err.message;
+    errEl.style.display = 'block';
+    submitBtn.disabled = false;
+    submitBtn.textContent = 'Confirm Order →';
+  }
+});
+
+loadProducts();
+</script>
+</body>
+</html>

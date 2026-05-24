@@ -1,0 +1,102 @@
+<% const title = 'Active Orders' %>
+<%- include('_head', { title }) %>
+<body>
+
+<div class="layout">
+  <%- include('_sidebar') %>
+
+  <main class="main">
+    <header class="page-head">
+      <div>
+        <span class="eyebrow">— Operations</span>
+        <h1 class="page-h1">Active Orders</h1>
+      </div>
+      <div class="page-head-meta">
+        <span class="muted"><%= orders.length %> active</span>
+      </div>
+    </header>
+
+    <%- include('_flash', { flash: typeof flash !== 'undefined' ? flash : null }) %>
+
+    <% if (orders.length === 0) { %>
+      <section class="panel">
+        <div class="empty">
+          <div class="empty-icon">📭</div>
+          <h3>No active orders</h3>
+          <p>When customers place orders, they'll appear here.</p>
+          <a href="/" target="_blank" class="btn btn-ghost">View public site ↗</a>
+        </div>
+      </section>
+    <% } else { %>
+      <section class="orders-grid">
+        <% orders.forEach(function(o) { %>
+          <article class="order-card order-<%= o.status %>">
+            <header class="order-head">
+              <div>
+                <div class="order-num">Order #<%= o.id %></div>
+                <div class="order-time"><%= new Date(o.created_at + 'Z').toLocaleString('en-US', { dateStyle: 'medium', timeStyle: 'short' }) %></div>
+              </div>
+              <span class="status-pill status-<%= o.status %>">
+                <%= o.status === 'in_delivery' ? 'In Delivery' : o.status.charAt(0).toUpperCase() + o.status.slice(1) %>
+              </span>
+            </header>
+
+            <div class="order-body">
+              <div class="order-section">
+                <div class="kv">
+                  <span class="k">Customer</span>
+                  <span class="v"><%= o.customer_name %></span>
+                </div>
+                <div class="kv">
+                  <span class="k">Phone</span>
+                  <a class="v link" href="tel:<%= o.customer_phone %>"><%= o.customer_phone %></a>
+                </div>
+                <div class="kv">
+                  <span class="k">Address</span>
+                  <span class="v"><%= o.customer_address %></span>
+                </div>
+                <% if (o.notes) { %>
+                  <div class="kv">
+                    <span class="k">Notes</span>
+                    <span class="v note"><%= o.notes %></span>
+                  </div>
+                <% } %>
+              </div>
+
+              <div class="order-section order-product">
+                <div class="op-line">
+                  <span class="op-name"><%= o.product_name %></span>
+                  <span class="op-qty">× <%= o.quantity %> L</span>
+                </div>
+                <div class="op-total">
+                  Total <strong>Rs <%= Math.round(o.total_price).toLocaleString() %></strong>
+                </div>
+              </div>
+            </div>
+
+            <footer class="order-foot">
+              <% if (o.status === 'pending') { %>
+                <form action="/admin/orders/<%= o.id %>/status" method="post" class="flex">
+                  <input type="hidden" name="status" value="in_delivery" />
+                  <button class="btn btn-primary btn-sm">Send to Delivery →</button>
+                </form>
+              <% } else if (o.status === 'in_delivery') { %>
+                <form action="/admin/orders/<%= o.id %>/status" method="post" class="flex">
+                  <input type="hidden" name="status" value="completed" />
+                  <button class="btn btn-success btn-sm">Mark Completed ✓</button>
+                </form>
+                <form action="/admin/orders/<%= o.id %>/status" method="post">
+                  <input type="hidden" name="status" value="pending" />
+                  <button class="btn btn-ghost btn-sm">Revert</button>
+                </form>
+              <% } %>
+            </footer>
+          </article>
+        <% }) %>
+      </section>
+    <% } %>
+  </main>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,6 @@
+<% if (typeof flash !== 'undefined' && flash) { %>
+  <div class="flash flash-<%= flash.type %>">
+    <span class="flash-icon"><%= flash.type === 'success' ? '✓' : '!' %></span>
+    <span><%= flash.message %></span>
+  </div>
+<% } %>

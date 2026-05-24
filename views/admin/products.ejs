@@ -1,0 +1,100 @@
+<% const title = 'Products' %>
+<%- include('_head', { title }) %>
+<body>
+
+<div class="layout">
+  <%- include('_sidebar') %>
+
+  <main class="main">
+    <header class="page-head">
+      <div>
+        <span class="eyebrow">— Catalog</span>
+        <h1 class="page-h1">Products</h1>
+      </div>
+      <div class="page-head-meta">
+        <span class="muted"><%= products.length %> product<%= products.length === 1 ? '' : 's' %></span>
+      </div>
+    </header>
+
+    <%- include('_flash', { flash: typeof flash !== 'undefined' ? flash : null }) %>
+
+    <div class="two-col">
+      <!-- Product list -->
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">— Current Catalog</span>
+            <h2 class="panel-title">Available products</h2>
+          </div>
+        </div>
+
+        <% if (products.length === 0) { %>
+          <div class="empty">
+            <div class="empty-icon">🥛</div>
+            <p>No products yet. Add your first one →</p>
+          </div>
+        <% } else { %>
+          <div class="product-list">
+            <% products.forEach(function(p) { %>
+              <div class="product-row">
+                <div class="product-thumb">
+                  <img src="<%= p.image_url %>" alt="<%= p.name %>" onerror="this.style.display='none'" />
+                </div>
+                <div class="product-meta">
+                  <div class="product-name"><%= p.name %></div>
+                  <div class="product-desc"><%= p.description %></div>
+                  <div class="product-id">ID: <%= p.id %></div>
+                </div>
+                <div class="product-price-col">
+                  <div class="price-big">Rs <%= p.price %></div>
+                  <div class="price-unit">per litre</div>
+                </div>
+                <form action="/admin/products/<%= p.id %>/delete" method="post"
+                      onsubmit="return confirm('Delete &quot;<%= p.name %>&quot;? This cannot be undone.')">
+                  <button type="submit" class="btn-icon btn-danger" title="Delete product">✕</button>
+                </form>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+      </section>
+
+      <!-- Add product -->
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">— Add New</span>
+            <h2 class="panel-title">New product</h2>
+          </div>
+        </div>
+
+        <form action="/admin/products/add" method="post" class="form">
+          <div class="form-group">
+            <label for="name">Product Name</label>
+            <input type="text" name="name" id="name" placeholder="Fresh Cow Milk" required />
+          </div>
+          <div class="form-group">
+            <label for="description">Description</label>
+            <textarea name="description" id="description" rows="4" required
+              placeholder="Describe what makes this product special…"></textarea>
+          </div>
+          <div class="form-row">
+            <div class="form-group">
+              <label for="price">Price (Rs/litre)</label>
+              <input type="number" name="price" id="price" min="1" step="1" placeholder="245" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="image_url">Image URL</label>
+            <input type="url" name="image_url" id="image_url" placeholder="https://…/photo.jpg" required />
+            <small class="hint">Paste a direct image URL. You can replace placeholder photos later.</small>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Add Product →</button>
+        </form>
+      </section>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>

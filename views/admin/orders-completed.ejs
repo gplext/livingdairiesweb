@@ -1,0 +1,63 @@
+<% const title = 'Completed Orders' %>
+<%- include('_head', { title }) %>
+<body>
+
+<div class="layout">
+  <%- include('_sidebar') %>
+
+  <main class="main">
+    <header class="page-head">
+      <div>
+        <span class="eyebrow">— Archive</span>
+        <h1 class="page-h1">Completed Orders</h1>
+      </div>
+      <div class="page-head-meta">
+        <span class="muted"><%= orders.length %> in archive (last 200)</span>
+      </div>
+    </header>
+
+    <%- include('_flash', { flash: typeof flash !== 'undefined' ? flash : null }) %>
+
+    <section class="panel">
+      <% if (orders.length === 0) { %>
+        <div class="empty">
+          <div class="empty-icon">📦</div>
+          <h3>No completed orders yet</h3>
+          <p>Once you mark active orders as completed, they'll archive here.</p>
+        </div>
+      <% } else { %>
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Date</th>
+                <th>Customer</th>
+                <th>Phone</th>
+                <th>Product</th>
+                <th class="num">Qty</th>
+                <th class="num">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% orders.forEach(function(o) { %>
+                <tr>
+                  <td class="mono">#<%= o.id %></td>
+                  <td class="muted-cell"><%= new Date(o.created_at + 'Z').toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) %></td>
+                  <td><strong><%= o.customer_name %></strong></td>
+                  <td><a class="link" href="tel:<%= o.customer_phone %>"><%= o.customer_phone %></a></td>
+                  <td><%= o.product_name %></td>
+                  <td class="num"><%= o.quantity %> L</td>
+                  <td class="num"><strong>Rs <%= Math.round(o.total_price).toLocaleString() %></strong></td>
+                </tr>
+              <% }) %>
+            </tbody>
+          </table>
+        </div>
+      <% } %>
+    </section>
+  </main>
+</div>
+
+</body>
+</html>
