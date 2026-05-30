@@ -1,0 +1,58 @@
+# Dependency directories
+node_modules/
+jspm_packages/
+
+# Build outputs and caches
+dist/
+build/
+.npm/
+.eslintcache/
+.tsbuildinfo/
+
+# Local databases and runtime data (SQLite)
+data/*.db
+data/*.db-shm
+data/*.db-wal
+data/sessions.db
+
+# Environment and secret files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+.env.*.local
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+*.log
+
+# Editor and IDE configurations
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# OS metadata files
+.DS_Store
+.DS_Store?
+._*
+Thumbs.db
+ehthumbs.db
+
+# Version control
+.git/
+.gitignore
+.gitattributes
+.hg/
+.svn/
+
+# Docker files
+Dockerfile
+.dockerignore

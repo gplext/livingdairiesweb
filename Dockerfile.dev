@@ -1,0 +1,24 @@
+FROM node:22-alpine
+
+# Install build dependencies for compilation of native C++ modules (like bcrypt and better-sqlite3)
+RUN apk add --no-cache python3 make g++
+
+WORKDIR /app
+
+# Copy dependency manifests
+COPY package*.json tsconfig.json ./
+
+# Install ALL dependencies including devDependencies (for ts-node-dev, typescript, and types)
+RUN npm install
+
+# Copy application source code
+COPY . .
+
+# Set development environment
+ENV NODE_ENV=development
+
+# Expose port 3000 for the hot-reloading dev server
+EXPOSE 3000
+
+# Start the application in development mode with ts-node-dev (hot-reloading)
+CMD ["npm", "run", "dev"]

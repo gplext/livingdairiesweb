@@ -1,0 +1,49 @@
+services:
+  # ============================================================================
+  # Development Environment (runs ts-node-dev with hot-reloading)
+  # ============================================================================
+  web-dev:
+    container_name: livingdairies-app-dev
+    build:
+      context: .
+      dockerfile: Dockerfile.dev
+    ports:
+      - "3000:3000"
+    volumes:
+      # Mount source files for hot-reloading (excludes node_modules and db data)
+      - .:/app
+      - /app/node_modules
+      # Persistent named volume for the SQLite database and sessions
+      - sqlite_dev_data:/app/data
+    environment:
+      - NODE_ENV=development
+      - PORT=3000
+      - SESSION_SECRET=dev-session-secret-key-12345
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=dairies123
+    restart: always
+
+  # ============================================================================
+  # Production Environment (runs optimized multi-stage bundle)
+  # ============================================================================
+  web-prod:
+    container_name: livingdairies-app-prod
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "8080:3000" # Expose production on port 8080 to avoid development conflicts
+    volumes:
+      # Persistent named volume for production SQLite database
+      - sqlite_prod_data:/app/data
+    environment:
+      - NODE_ENV=production
+      - PORT=3000
+      - SESSION_SECRET=change-this-to-a-long-secure-random-string-in-production
+      - ADMIN_USERNAME=admin
+      - ADMIN_PASSWORD=dairies123
+    restart: always
+
+volumes:
+  sqlite_dev_data:
+  sqlite_prod_data:
