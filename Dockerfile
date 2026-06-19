@@ -31,17 +31,21 @@ FROM node:22-alpine AS runner
 
 WORKDIR /app
 
-# Expose production environment variable
+# Set production environment
 ENV NODE_ENV=production
 
-# Copy compiled application code and production node_modules from builder
-COPY --from=builder /app/dist ./dist
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
+# Create database directory and set permissions for node user
+RUN mkdir -p /app/data && chown -R node:node /app/data
 
-# Copy static assets and template views
-COPY --from=builder /app/views ./views
-COPY --from=builder /app/public ./public
+# Copy compiled application code, production dependencies, and assets with node user ownership
+COPY --chown=node:node --from=builder /app/dist ./dist
+COPY --chown=node:node --from=builder /app/node_modules ./node_modules
+COPY --chown=node:node --from=builder /app/package.json ./package.json
+COPY --chown=node:node --from=builder /app/views ./views
+COPY --chown=node:node --from=builder /app/public ./public
+
+# Use the non-root node user for security
+USER node
 
 # Expose the port the web server listens on
 EXPOSE 3000

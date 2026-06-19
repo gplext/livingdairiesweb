@@ -91,9 +91,9 @@ if (productCount === 0) {
     INSERT INTO products (name, description, price, image_url) VALUES (?, ?, ?, ?)
   `).run(
     'Fresh Farm Milk',
-    'Pure buffalo milk, hand-collected at dawn from our family farms in Punjab. No preservatives, no powders, no shortcuts. Delivered same-day, chilled and ready to enjoy.',
+    'Pure cow milk, hand-collected at dawn from our family farms in Punjab. No preservatives, no powders, no shortcuts. Delivered same-day, chilled and ready to enjoy.',
     245,
-    'https://images.unsplash.com/photo-1563636619-e9143da7973b?w=800&q=80'
+    'img/Order/Pour_from_MilkPacking.png'
   );
   console.log('✓ Seeded default product');
 }

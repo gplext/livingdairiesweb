@@ -1,221 +1,522 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-<meta charset="UTF-8" />
-<link rel="icon" type="image/x-icon" href="/images/favicon.ico" />
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png" />
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png" />
-<meta name="theme-color" content="#B83729" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>About — Living Dairies</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,700;9..144,900&family=Manrope:wght@300;400;500;600;700&display=swap">
-<link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Company – Living Dairies</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,800;1,400&family=Lato:wght@300;400;700&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
-<nav class="nav">
-  <div class="nav-inner">
-    <a href="index.html" class="logo logo-img-wrap">
-      <img src="images/logo.jpg" alt="Living Dairies" class="logo-img" />
-      <span class="nav-tagline">Nourishing your day</span>
-    </a>
+  <nav class="navbar" id="navbar">
+    <div class="nav-logo"><img src="img/logo/Logo_Original_Cleaned.png" alt="Living Dairies Logo" class="logo-leaf"><img
+        src="img/logo/Text_Logo_Attached_About_Cleaned2.png" alt="Living Dairies" class="logo-text"></div>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
-      <li><a href="about.html" class="active">About</a></li>
-      <li><a href="order.html">Order</a></li>
+      <li><a href="order.html">Order Online</a></li>
+      <li><a href="gallery.html">Photo Gallery</a></li>
+      <li><a href="about.html" class="active">About Company</a></li>
+      <li><a href="contact.html">Contact Us</a></li>
     </ul>
-    <a href="order.html" class="nav-cta">Order Now →</a>
-  </div>
-</nav>
+    <div class="nav-toggle" onclick="toggleMenu()">&#9776;</div>
+  </nav>
 
-<!-- PAGE HEADER -->
-<header class="page-header">
-  <div class="container">
-    <span class="eyebrow">— About Us</span>
-    <h1 class="page-title">
-      A family farm.<br>
-      A simple <span class="italic">promise.</span>
-    </h1>
-    <p class="page-lede">
-      At Living Dairies, we believe in the power of pure, fresh milk to nourish not just your body, but your soul. Our story is one of tradition, care, and a relentless commitment to quality — from our family farm in Punjab to your family table.
-    </p>
-  </div>
-</header>
+  <section class="page-hero board-hero">
+    <div class="page-hero-overlay"></div>
+    <div class="page-hero-content">
+      <span class="section-label">Leadership</span><span class="section-label">Our Story</span>
+      <h1>About Us</h1>
+      <p>The visionaries, strategists, and stewards guiding Living Dairy into the future</p>
+      <p>Harnessing renewable energy and smart agricultural data</p>
+      <p>20 years of passion, purpose, and pure dairy excellence</p>
+    </div>
+  </section>
 
-<!-- STORY -->
-<section class="story">
-  <div class="container story-grid">
-    <div class="story-image">
-      <img src="images/pakistani-countryside.jpeg" alt="Pakistani countryside" />
+  <!-- BOARD INTRO -->
+  <section class="board-intro">
+    <div class="bi-container">
+      <p>At Living Dairy, our Board of Directors is the backbone of our institutional strength. Each member brings
+        decades of expertise spanning agriculture, food science, technology, finance, and governance. Together they
+        chart the course for a company that is simultaneously rooted in the rich farming traditions of Punjab and boldly
+        oriented toward a modern, sustainable future.</p>
     </div>
-    <div class="story-text">
-      <span class="section-num">01</span>
-      <h2 class="section-title">Our Story</h2>
-      <p>In 2008, Mohammad Nasrullah was looking at various investments in pakistan, when he came across this idea of dairy farm. Other investers specially Mr. Salman encourage him to invest in agriculture and farm sector in pakistan. Thus began a journey to modernize animal rearing and milking business in pakistan and to bring the highest quality and the most freshed milk to customers in lahore.</p>
-      <p>What started as a tiny herd and a smallest of areas has now become 250+ animals and 5 acres of land. Helping Mr. Nasrullah and Mr. Salman dream become a reality.</p>
-      <p>That look is why Living Dairies exists.</p>
-    </div>
-  </div>
-</section>
+  </section>
 
-<!-- VALUES -->
-<section class="values">
-  <div class="container">
-    <div class="values-header">
-      <span class="section-num">02</span>
-      <h2 class="section-title light">What we<br><span class="italic">stand for.</span></h2>
-    </div>
-    <div class="values-grid">
-      <div class="value-card">
-        <div class="value-icon value-icon-red">01</div>
-        <h3>Purity, Always</h3>
-        <p>Not a drop of water, not a gram of powder, not a single preservative. What comes from the from our milking cows is what reaches your glass.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-icon value-icon-green">02</div>
-        <h3>Kind to Animals</h3>
-        <p>Our cows move around freely, sleep on clean bedding, and are treated by veterinarians regularly. Happy animals make better milk.</p>
-      </div>
-      <div class="value-card">
-        <div class="value-icon value-icon-blue">03</div>
-        <h3>Fast to Your Door</h3>
-        <p>Milked at 5:00 AM. Chilled before 6:00 AM. At our distribution center by 8:00 AM.    </p>
-      </div>
-      <div class="value-card">
-        <div class="value-icon value-icon-red">04</div>
-        <h3>Fair to Farmers</h3>
-        <p>Every farmer on our team earns above industry wage and shares in our growth. Good milk needs good people.</p>
-      </div>
-    </div>
-  </div>
-</section>
+  <!-- BOARD MEMBERS -->
+  <section class="board-section">
+    <div class="board-container">
 
-<!-- TIMELINE -->
-<section class="timeline-section">
-  <div class="container">
-    <div class="timeline-header">
-      <span class="section-num">03</span>
-      <h2 class="section-title">A decade of<br><span class="italic">growth.</span></h2>
+      <!-- CEO -->
+      <div class="board-card featured">
+        <div class="bc-img-wrap">
+          <img src="img/Board/Omer_M_Talking.jpeg" alt="CEO Omar Muslehuddin">
+          <div class="bc-badge">Chief Executive Officer</div>
+        </div>
+        <div class="bc-info">
+          <h2>Mr. Muslehuddin</h2>
+          <p class="bc-subtitle">Chief Executive Officer</p>
+          <p class="bcs-bio">A veteran in farming best practices and people management, Mr. Omar brings years of
+            practical experience in successfully managing farm operations, livestock care, and workforce coordination.
+            He has a strong understanding of what decisions are best for the farm's productivity, sustainability, and
+            long-term growth, and he ensures those decisions are implemented effectively through proper planning,
+            staff supervision, and consistent monitoring. His leadership, discipline, and hands-on approach help
+            maintain high operational standards while creating an efficient and well-managed farming environment.</p>
+          <div class="bc-tags">
+            <span>Leadership</span><span>Management</span><span>Experience</span><span>Excellence</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- GRID MEMBERS -->
+      <div class="board-grid">
+
+        <div class="board-card-sm">
+          <img src="img/Board/Mr_NasrUllah_FacingCamera.jpeg" alt="BM Mohammad Nasrullah">
+          <div class="bcs-info">
+            <h3>Mr. Mohammad Nasrullah</h3>
+            <p class="bcs-pos">Board member</p>
+            <p class="bcs-bio">Mohammad Nasrullah is an ex-banking professional having worked in the diverse banking
+              sector in different geographical
+              areas in Middle East & South Asia. He has invested in a few ventures, but has been passionate about
+              pursuing agriculture and dairy business, especially in Pakistan. Over the
+              years, he has build a sustainable agriculture, dairy and food business in Pakistan. The establishment of
+              Living Dairies is part of his ambition to support continuous food security and to provide nutrition to
+              people of Pakistan. Over the past two decades, the farm has experienced significant growth and achieved
+              strong
+              profitability. Retired from banking, Mr. Nasrullah is now fully involved in supporting farm operations
+              and its meaningful growth in times to come.</p>
+            <div class="bc-tags">
+              <span>Strategic Leadership</span><span>Agri-Business</span><span>Sustainability</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="board-card-sm">
+          <img src="img/Board/Shoaib_AspectRatio_19_10.png" alt="BM Omar Shoaib">
+          <div class="bcs-info">
+            <h3>Mr. Shoaib khalid</h3>
+            <p class="bcs-pos">Board member</p>
+            <p class="bcs-bio">Mr. Shoaib khalid is a distinguished board member of Living Dairies with extensive
+              expertise in operating, managing and supporting farm business for last 15 years. Drawing on decades of
+              experience in livestock and farm management, he provides invaluable strategic guidance to the organization
+              and its staff.
+              Mr. Shoaib is not considered a specialist in dairy business, and uses this knowledge to initiate
+              problem-solving initiatives,
+              advising on animal welfare protocols, herd output optimization, and operational challenges. His deep
+              knowledge of agricultural
+              and diary farming ensures that Living Dairy maintains the highest standards of animal care and farm
+              productivity, directly
+              supporting the company's mission to delivery excellent quality product profitablity.</p>
+            <div class="bc-tags">
+              <span>Operations</span><span>Dairy specialist</span><span>Animal husbandry</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="board-card-sm">
+          <img src="https://ui-avatars.com/api/?name=Mr.+Salman&size=200&background=95d5b2&color=fff&font-size=0.4"
+            alt="Mr. Salman">
+          <div class="bcs-info">
+            <h3>Mr. Salman</h3>
+            <p class="bcs-pos">Board member</p>
+            <p class="bcs-bio">Mr. Salman was the original proponent of investment into mordern farming in Pakistan. He
+              had the
+              vision and the dream which led to the start of Living Dairies. He worked with Mr. Nasrullah to establish a
+              running
+              farm from a piece of land. Moreover, he help lay the foundation of the business practices and ideals that
+              living dairies and its founders stands for. Unfortunately, Mr. Salman no longer plays an active role in
+              the farm management or board decisions but his wisdom, enthusiams and vision are deeply embedded into
+              hopes and ideals of Living Dairies (Pvt) Limited</p>
+            <div class="bc-tags">
+              <span>Vision</span><span>Planning</span><span>Investment</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="board-card-sm">
+          <img src="img/Board/Mustafa_AspectRatio_19_10.png" alt="COO-Farm Mustafa">
+          <div class="bcs-info">
+            <h3>Mr. Mustafa Muslehuddin</h3>
+            <p class="bcs-pos">COO farm</p>
+            <p class="bcs-bio">Mr. Mustafa Muslehuddin is a young member of Living Dairies and current serving as the
+              COO of the farm.
+              With a distinguished tenure overseeing the organization's strategic direction, he plays a pivotal role in
+              ensuring alignment between board objectives and on-ground operational realities. His keen oversight and
+              commitment to accountability maintain the integrity of company standards, bridging the gap between
+              corporate governance and field execution. Mr. Muslehuddin's experience and judgment are instrumental in
+              driving operational excellence and ensuring that Living Dairy's core values and quality commitments are
+              consistently met across all divisions.</p>
+            <div class="bc-tags">
+              <span>Operations</span><span>Management</span><span>Problem solving</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="board-card-sm">
+          <img src="img/Board/MadamTahira_AspectRatio_19_10.png" alt="COO-Sales Madam Tahira">
+          <div class="bcs-info">
+            <h3>Madam Tahira</h3>
+            <p class="bcs-pos">COO food division & Head of sales</p>
+            <p class="bcs-bio">Madam Tahira is the COO of the food division and Head of Sales at Living Dairies. She
+              overseas financial operations, HR, accounts and company owned milk retail shop in Main Market, Lahore.
+              Moreover,
+              she manages milk delivery operations to retail and wholesale customers. With her
+              extensive
+              banking experience, acquired business acumen and meticulous attention to details, she
+              plays a pivotal role in realizing the organization's goals by meeting sales targets and increasing
+              profitability. Her efforts for the food division ensures alignment between
+              board objectives and on-ground operational realities. Her keen oversight and commitment to maximizing
+              profit and
+              minimizing loss or low profit enterprises help to bridge the gap between corporate governance and field
+              execution. Her experience and judgment are instrumental in driving operational excellence and ensuring
+              that
+              Living Dairy's core values and quality commitments are consistently met by the foods
+              divisions. Her dual expertise in operations and retail operations exemplifies the integrated
+              approach that drives Living Dairy's continued success.</p>
+            <div class="bc-tags">
+              <span>Food Technology</span><span>Automation</span><span>Sales</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="board-card-sm">
+          <img src="img/Board/DrAsif_AspectRatio_19_10.png" alt="Vet Asif Nadeem">
+          <div class="bcs-info">
+            <h3>Dr. Asif Nadeem</h3>
+            <p class="bcs-pos">Farm Manager and Veterinary doctor</p>
+            <p class="bcs-bio">Dr. Asif is the Farm Manager and Chief Veterinary Doctor of Living Dairies, bringing a
+              decade of dedicated leadership to the organization. Over the past 10 years, he has transformed farm
+              operations from a state of disorganization into a seamlessly functioning enterprise, establishing robust
+              systems and ensuring disciplined execution of strategic decisions. Dr. Asif currently oversees all
+              day-to-day farm operations while spearheading the implementation of innovative policies and
+              state-of-the-art equipment designed to enhance productivity and profitability. His dual expertise in
+              veterinary science and farm management ensures optimal animal health, operational efficiency, and the
+              achievement of the company's ambitious growth targets.</p>
+            <div class="bc-tags">
+              <span>Animal Health</span><span>Herd Mgmt</span><span>Breeding</span>
+            </div>
+          </div>
+        </div>
+
+        <!--
+        <div class="board-card-sm">
+          <img src="img/Board/Sikandar_AspectRatio_19_10.png" alt="Mr. Sikandar Nazir">
+          <div class="bcs-info">
+            <h3>Mr. Sikandar Nazir</h3>
+            <p class="bcs-pos">Company Accountant</p>
+            <p class="bcs-bio">Mr. Sikandar serves as Accountant for Living Dairies, managing comprehensive daily
+              accounting functions and financial record-keeping for the organization. He is responsible for preparing
+              accurate and timely accounting reports that provide clear insight into the company's financial health and
+              performance. With meticulous attention to detail and a strong commitment to regulatory compliance, Mr.
+              Sikandar ensures that all SECP (Securities and Exchange Commission of Pakistan) rules and regulations are
+              rigorously followed, maintaining the highest standards of financial governance and transparency. His
+              diligent work safeguards the organization's financial integrity and supports informed decision-making at all
+              levels of management.</p>
+            <div class="bc-tags">
+              <span>Accounting</span><span>Finance</span><span>Compliance</span>
+            </div>
+          </div>
+        </div>
+        -->
+
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLAR ELECTRICITY -->
+  <section class="about-section alt-bg">
+    <div class="about-block">
+      <div class="ab-text">
+        <span class="section-label">Renewable Energy</span>
+        <h2>Solar Panels for Electricity</h2>
+        <p>To run a modern farm sustainably, we have harnessed the power of the sun. Living Dairies has installed a
+          state-of-the-art 20kW solar power plant on our farm estate. This renewable energy system runs the entire
+          farm’s electrical infrastructure during daytime hours, powering the automated milking lines, fans,
+          ventilation, and cooling systems in our climate-controlled sheds.</p>
+        <p>By shifting our core day operations to clean solar power, we have drastically reduced our dependency on the
+          national grid and cut our carbon footprint, ensuring that our fresh milk is processed with clean, green
+          energy.</p>
+      </div>
+      <div class="ab-visual">
+        <div class="about-img-box"
+          style="background-image: url('img/Technology/Electric_System_Photo_Enhanced.jpg'); background-size: cover; background-position: center; box-shadow: var(--shadow-heavy);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SOLAR TUBE WELLS -->
+  <section class="about-section">
+    <div class="about-block reverse">
+      <div class="ab-visual">
+        <div class="about-img-box"
+          style="background-image: url('img/Technology/Solar_Tubewell_Generated.png'); background-size: cover; background-position: center; box-shadow: var(--shadow-heavy);">
+        </div>
+      </div>
+      <div class="ab-text">
+        <span class="section-label">Water Management</span>
+        <h2>Solar-Powered Tube Wells</h2>
+        <p>Water is the lifeblood of our crops and cows. To grow organic silage, green fodder, and keep our pastures
+          lush, we rely on deep tubewells. Rather than consuming diesel or grid power, our wells are powered entirely by
+          dedicated solar arrays.</p>
+        <p>This solar-powered irrigation system delivers hundreds of gallons of clean groundwater daily to our crops and
+          drinking troughs, guaranteeing an uninterrupted water supply for our premium herd. It is an environmentally
+          responsible approach to resource management that keeps our land green and operational costs low.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ANIMAL TAGGING -->
+  <section class="about-section alt-bg">
+    <div class="about-block">
+      <div class="ab-text">
+        <span class="section-label">Smart Herd Health</span>
+        <h2>Animal Tagging and behaviour monitoring</h2>
+        <p>The health of our cows comes first. To monitor our premium herd, every cow is equipped with a smart tag for
+          animal tracking. These tags allow us to monitor the animals and check their behavior, including eating habits,
+          daily activity and behavior around other animals.</p>
+        <p>Our veterinary team can monitor activity levels, rumination cycles, body temperature, and early signs of
+          discomfort. This allows us to detect health issues days before physical symptoms appear, ensuring swift
+          preventative medical care, optimizing nutrition, and guaranteeing that only the healthiest cows produce milk
+          for your table.</p>
+      </div>
+      <div class="ab-visual">
+        <div class="about-img-box"
+          style="background-image: url('img/Technology/Cow_Tagged_To_Show_Tagging.JPG'); background-size: cover; background-position: center; box-shadow: var(--shadow-heavy);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FARM MANAGEMENT SOFTWARE -->
+  <section class="about-section">
+    <div class="about-block reverse">
+      <div class="ab-visual">
+        <div class="about-img-box"
+          style="background-image: url('img/Technology/DairyCare_Software_snapshot.png'); background-size: cover; background-position: center; box-shadow: var(--shadow-heavy);">
+        </div>
+      </div>
+      <div class="ab-text">
+        <span class="section-label">Data Analytics</span>
+        <h2>Farm Management Software</h2>
+        <p>All our farm operations are integrated into a single, unified Farm Management Software platform. Every detail
+          is logged digitally: from individual milk yield outputs per milking session, nutritionist feed ratios,
+          breeding histories, to general operational logs.</p>
+        <p>This software allows our management board and veterinarian staff to make informed, data-driven decisions. By
+          tracking trends and optimizing herd performance, we ensure consistent milk quality, minimize waste, and
+          maintain absolute transparency in our supply chain from pasture to package.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- HISTORY -->
+  <section class="about-section alt-bg">
+    <div class="about-block">
+      <div class="ab-text">
+        <span class="section-label">History</span>
+        <h2>From twelve cows to a thriving cow herd</h2>
+        <p>When the initial founders started the farm, bringing investment into Pakistan for such
+          an uncertain project seemed like nothing more than a dream. Many people believed that running a clean and
+          transparent business was impossible, that profit margins in dairy farming were too low, and that dealing with
+          village communities would be extremely challenging. However, the fellow directors remained
+          committed and stood firm through every obstacle. What began with just a dozen cows has now grown into a herd
+          of more than 250 cows, with around 100 cows becoming pregnant each year. In addition, the farm has crossed a
+          major milestone by producing more than 1,000 liters of milk daily. Most importantly, the farm has maintained
+          strong and healthy profits over the years. As a result, the business continues to hire more staff, offer
+          better salaries, contribute more taxes to the government, and reinvest in improved technology and
+          infrastructure. Above all, it provides ordinary people with clean, healthy, and reasonably priced milk without
+          concerns about additives or quality issues.</p>
+      </div>
+      <div class="ab-visual">
+        <div class="about-img-box"
+          style="background-image:url('img/About/MainShed_Right.jpeg'); background-size:cover; background-position:center;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- HERD -->
+  <section class="about-section">
+    <div class="about-block reverse">
+      <div class="ab-visual">
+        <div class="about-img-box"
+          style="background-image:url('img/About/200Plus_cows.jpg'); background-size:cover; background-position:center;">
+        </div>
+      </div>
+      <div class="ab-text">
+        <span class="section-label">Our Herd</span>
+        <h2>Cows are the company's asset</h2>
+        <p>Cows that were once valued at 1 lac in the books are now being sold for 4 lacs or more. With such a valuable
+          and easily cashable asset base, the farm is in a strong financial position to raise capital if needed or to
+          patiently wait for the annual herd growth of over 100 cows to mature and further increase profitability. What
+          once started with just 12 cows is now on track to grow into a herd of 1,000 cows within the next five years.
+          This is no longer just a dream, but a proven and highly promising business model.
+      </div>
+    </div>
+  </section>
+
+  <!-- PASTEURISATION -->
+  <section class="about-section alt-bg">
+    <div class="about-block">
+      <div class="ab-text">
+        <span class="section-label">Milk Processing</span>
+        <h2>How we keep milk fresh</h2>
+        <p>It is not just the quick delivery that ensures milk reaches the market within 12 hours of milking. It is not
+          only the advanced chillers and mixers from leading European brands, the skilled hands that carry out milking
+          efficiently, or the strict filtration and regular quality tests. What truly sets us apart is our wholehearted
+          commitment to quality and fresh milk. Every step of the milking process is carefully managed and given the
+          attention it deserves. From providing cows with comfortable spaces to sleep and walk, continuous care by
+          trained staff, and temperature-controlled sheds, to grouping similar herds together and ensuring feed quality
+          and nutrient mixing are monitored by experts, every detail matters. The milk is also regularly tested to
+          maintain the highest standards of quality. That is why our milk is always fresh, pure, and trustworthy.</p>
+      </div>
+      <div class="ab-visual">
+        <div class="about-img-box"
+          style="background-image:url('img/About/Milk_Mixing_Chillling_Gemini.jpg'); background-size:cover; background-position:center;">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- YOGURT -->
+  <section class="about-section">
+    <div class="about-block reverse">
+      <div class="ab-visual">
+        <div class="about-img-box"
+          style="background-image:url('img/About/Companyoperations.jpg'); background-size:cover; background-position:center;">
+        </div>
+      </div>
+      <div class="ab-text">
+        <span class="section-label">Company Operations</span>
+        <h2>Company Operations & Statistics</h2>
+        <p>With more than 20 years of operations and over 10 years of experience under a single Farm Manager, the farm
+          has built a strong foundation of consistency, expertise, and trust. The directors personally conduct
+          inspections every two weeks to ensure the highest standards are maintained across all operations. Spread
+          across 4 acres of land dedicated to growing feed, the farm also embraces sustainable practices with a 20kW
+          solar plant and a solar-powered tubewell. The farm achieves around 100 calvings annually and currently has 97
+          milking animals producing exceptional results. In the last month alone, the farm produced 25,000 liters of
+          milk, while also selling around 25 animals every year. Some of the top-performing cows produce as much as 28
+          liters of milk daily, reflecting the farm’s focus on quality care, nutrition, and efficient management.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- TIMELINE -->
+  <section class="timeline-section">
+    <div class="tl-header">
+      <span class="section-label">Milestones</span>
+      <h2>Our Journey Through the Years</h2>
     </div>
     <div class="timeline">
-      <div class="timeline-item">
-        <div class="timeline-year">2008</div>
-        <div class="timeline-content">
-          <h3>One dream, one bare land.</h3>
-          <p>From a dream of investment started the purchase of a land in chunia.</p>
+      <div class="tl-item left">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-year">2008</span>
+          <h4>Farm Founded</h4>
+          <p>Living Dairy established with 12 cows, 1 shed, and a dream of pure dairy for Pakistan.</p>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2010</div>
-        <div class="timeline-content">
-          <h3>The private limited company.</h3>
-          <p>4 board of directors a team of experts and a staff ready to execute the plan for the perfect farm and finally the company registers.</p>
+      <div class="tl-item right">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-year">2011</span>
+          <h4>First 50 Cows</h4>
+          <p>Herd expanded to 50 animals. First commercial delivery contracts signed in Lahore.</p>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2011</div>
-        <div class="timeline-content">
-          <h3>First major cow herd.</h3>
-          <p>A milstone of 50 cows, the farm is now unstoppable.</p>
+      <div class="tl-item left">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-year">2015</span>
+          <h4>Processing Plant Built</h4>
+          <p>PKR 8M investment in a modern processing plant and cold-chain infrastructure.</p>
         </div>
       </div>
-      <div class="timeline-item">
-        <div class="timeline-year">2015</div>
-        <div class="timeline-content">
-          <h3>Facilities established.</h3>
-          <p>Out of pots and pans and into the mordern machinery, the milk goes.</p>
+      <div class="tl-item right">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-year">2018</span>
+          <h4>100 Cows Milestone</h4>
+          <p>Herd reached 100. In collaboration with living foods, yogurt, butter & milk product lines launched. Staff
+            colony completed.</p>
+        </div>
+      </div>
+      <div class="tl-item left">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-year">2020</span>
+          <h4>High Quality Breeds</h4>
+          <p>Improve insemination practices and breeding programs to enhance herd genetics.</p>
+        </div>
+      </div>
+      <div class="tl-item right">
+        <div class="tl-dot"></div>
+        <div class="tl-card">
+          <span class="tl-year">2024</span>
+          <h4>Highly Profitable</h4>
+          <p>Implement advanced financial strategies and operational efficiencies to maximize profitability.</p>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- LOCATION / MAP -->
-<section class="location">
-  <div class="container location-grid">
-    <div class="location-info">
-      <span class="section-num">04</span>
-      <h2 class="section-title">Come<br><span class="italic">visit us.</span></h2>
-      <p class="location-desc">Drop by our shop in the heart of Gulberg — pick up your milk fresh, meet the team, or just have a cup of chai with us. We'd love to see you.</p>
-
-      <div class="location-details">
-        <div class="loc-block">
-          <div class="loc-label">Address</div>
-          <div class="loc-value">5 E Main Market<br>Gulberg, Lahore, Pakistan</div>
-        </div>
-        <div class="loc-block">
-          <div class="loc-label">Phone</div>
-          <div class="loc-value"><a href="tel:+924235755446" class="loc-link">(042) 35755446</a></div>
-        </div>
-        <div class="loc-block">
-          <div class="loc-label">Email</div>
-          <div class="loc-value"><a href="mailto:sikandar@livingdairies.com" class="loc-link">sikandar@livingdairies.com</a></div>
-        </div>
-        <div class="loc-block">
-          <div class="loc-label">Shop Hours</div>
-          <div class="loc-value">Monday – Friday<br>9:30 AM – 5:00 PM</div>
-        </div>
-        <div class="loc-block">
-          <div class="loc-label">Delivery Window</div>
-          <div class="loc-value">10:00 AM – 5:00 PM<br>(Daily, doorstep)</div>
-        </div>
+  <!-- FOOTER -->
+  <footer class="site-footer">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="footer-logo"><img src="img/logo/Logo_Original_Cleaned.png" alt="Living Dairies Logo"
+            class="logo-leaf"><img src="img/logo/Text_Logo_Attached_About_Cleaned2.png" alt="Living Dairies"
+            class="logo-text"></div>
+        <p class="footer-tagline">Pure from the Pasture.<br>Trusted at the Table.</p>
+        <!-- SOCIAL ICONS COMMENTED OUT
+      <div class="footer-socials">
+        <a href="#" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+        <a href="#" class="social-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg></a>
+        <a href="#" class="social-icon"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M4 4l16 16M20 4L4 20" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/></svg></a>
       </div>
-
-      <a href="https://www.google.com/maps/search/?api=1&query=5+E+Main+Market+Gulberg+Lahore" target="_blank" rel="noopener" class="btn btn-ghost loc-btn">Open in Google Maps →</a>
-    </div>
-
-    <div class="location-map">
-      <div class="map-pin">
-        <span class="pin-dot"></span>
-        Our Shop
+      -->
       </div>
-      <iframe
-        title="Living Dairies — 5 E Main Market, Gulberg, Lahore"
-        src="https://maps.google.com/maps?q=5%20E%20Main%20Market%20Gulberg%20Lahore&t=&z=15&ie=UTF8&iwloc=&output=embed"
-        loading="lazy"
-        referrerpolicy="no-referrer-when-downgrade"
-        allowfullscreen></iframe>
-    </div>
-  </div>
-</section>
-
-<!-- CTA -->
-<section class="cta-band">
-  <div class="container cta-inner">
-    <h2 class="cta-title">Become part of the family.</h2>
-    <a href="order.html" class="btn btn-light">Order Your First Bottle →</a>
-  </div>
-</section>
-
-<footer class="footer">
-  <div class="container footer-grid">
-    <div>
-      <div class="logo logo-img-wrap footer-logo-wrap">
-        <img src="images/logo.jpg" alt="Living Dairies" class="logo-img logo-img-footer" />
+      <div class="footer-links-col">
+        <h4>Quick Links</h4>
+        <ul>
+          <li><a href="index.html">Home</a></li>
+          <li><a href="order.html">Order Online</a></li>
+          <li><a href="gallery.html">Photo Gallery</a></li>
+          <li><a href="about.html">About Company</a></li>
+          <li><a href="contact.html">Contact Us</a></li>
+        </ul>
       </div>
-      <p class="footer-tag">Nourishing your day</p>
+      <div class="footer-links-col">
+        <h4>Legal</h4>
+        <ul>
+          <li><a href="terms.html">Terms &amp; Conditions</a></li>
+          <li><a href="privacy.html">Privacy Policy</a></li>
+          <li><a href="cookies.html">Cookie Policy</a></li>
+        </ul>
+      </div>
+      <!-- NEWSLETTER COMMENTED OUT
+    <div class="footer-newsletter">
+      <h4>Newsletter</h4>
+      <p>Get farm updates, seasonal offers & dairy tips straight to your inbox.</p>
+      <div class="nl-form">
+        <input type="email" placeholder="Your email address">
+        <button>Subscribe</button>
+      </div>
     </div>
-    <div class="footer-col">
-      <h4>Visit</h4>
-      <p>5 E Main Market,<br>Gulberg, Lahore, Pakistan</p>
+    -->
     </div>
-    <div class="footer-col">
-      <h4>Contact</h4>
-      <p>(042) 35755446<br>sikandar@livingdairies.com</p>
+    <div class="footer-bottom">
+      <p>© 2026 Living Dairies Ltd. All Rights Reserved. | Lahore, Pakistan</p>
     </div>
-    <div class="footer-col">
-      <h4>Hours</h4>
-      <p>Mon–Fri · 9:30 AM – 5:00 PM<br>Delivery: 10:00 AM – 5:00 PM</p>
-    </div>
-  </div>
-  <div class="footer-bottom">
-    <span>© 2026 Living Dairies. All rights reserved.</span>
-    <span>livingdairies.com</span>
-  </div>
-</footer>
+  </footer>
 
+  <script src="script.js"></script>
 </body>
+
 </html>

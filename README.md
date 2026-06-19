@@ -7,15 +7,28 @@ A complete milk delivery website with admin panel.
 
 ## Quick Start
 
+### macOS / Linux / PowerShell (with RemoteSigned)
 ```bash
 # 1. Install dependencies
 npm install
 
-# 2. (Optional) copy env file and edit credentials
+# 2. Copy env file and edit credentials
 cp .env.example .env
 
 # 3. Run in dev mode
 npm run dev
+```
+
+### Windows (without RemoteSigned policy / Command Prompt)
+```cmd
+# 1. Install dependencies
+npm.cmd install
+
+# 2. Copy env file and edit credentials
+copy .env.example .env
+
+# 3. Run in dev mode
+npm.cmd run dev
 ```
 
 Then open:
@@ -24,6 +37,61 @@ Then open:
 
 **Default admin credentials:** `admin` / `dairies123`
 ⚠️ **Change these immediately** by editing `.env` before first run, or via the database.
+
+---
+
+## Environment Variables
+
+Create a `.env` file in the root directory (copied from `.env.example`) and configure the following variables:
+
+| Variable | Description | Default / Example |
+| :--- | :--- | :--- |
+| `PORT` | The port the Express web server listens on. | `3000` |
+| `SESSION_SECRET` | Secret key used to sign the session cookie. Use a strong random key in production. | `change-this-to-a-long-random-string-in-production` |
+| `ADMIN_USERNAME` | Admin login username. | `admin` |
+| `ADMIN_PASSWORD` | Admin login password. | `dairies123` |
+
+---
+
+## Running with Docker
+
+You can run the application in either development or production modes using Docker and Docker Compose.
+
+### Development Mode (with Hot-Reloading)
+
+The development setup mounts the codebase into the container so that any changes you make locally are reflected immediately without rebuilding.
+
+```bash
+# Start in development mode (hot-reloading enabled)
+docker-compose up -d web-dev
+
+# View real-time logs
+docker-compose logs -f web-dev
+
+# Stop development environment
+docker-compose down
+```
+
+- **Public Site:** http://localhost:3000
+- **Admin Panel:** http://localhost:3000/admin/login
+
+### Production Mode
+
+The production build uses a multi-stage `Dockerfile` to optimize the container size and performance.
+
+```bash
+# Build and start in production mode
+docker-compose up -d web-prod --build
+
+# View logs
+docker-compose logs -f web-prod
+
+# Stop production environment
+docker-compose down
+```
+
+- **Public Site:** http://localhost:8080
+- **Admin Panel:** http://localhost:8080/admin/login
 
 ---
 

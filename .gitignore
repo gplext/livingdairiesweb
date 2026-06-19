@@ -1,9 +1,40 @@
+# Dependency directories
 node_modules/
 dist/
+
+# Build files
+*.tsbuildinfo
+
+# Database / SQLite files (auto-generated)
 data/*.db
 data/*.db-shm
 data/*.db-wal
 data/sessions.db
+
+# Environment variables
 .env
+.env.local
+.env.*.local
+
+# Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# OS files
 .DS_Store
+Thumbs.db
+
+# IDEs and editors
+.vscode/
+.idea/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Docker
+docker-compose.override.yml
