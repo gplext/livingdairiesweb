@@ -42,6 +42,15 @@ services:
       - SESSION_SECRET=${SESSION_SECRET}
       - ADMIN_USERNAME=${ADMIN_USERNAME}
       - ADMIN_PASSWORD=${ADMIN_PASSWORD}
+      # Email notifications (optional — can also be configured in the admin panel)
+      - SMTP_HOST=${SMTP_HOST:-}
+      - SMTP_PORT=${SMTP_PORT:-587}
+      - SMTP_SECURE=${SMTP_SECURE:-false}
+      - SMTP_USER=${SMTP_USER:-}
+      - SMTP_PASS=${SMTP_PASS:-}
+      - MAIL_FROM=${MAIL_FROM:-}
+      - ADMIN_EMAIL=${ADMIN_EMAIL:-}
+      - APP_BASE_URL=${APP_BASE_URL:-}
     restart: always
 
 volumes:

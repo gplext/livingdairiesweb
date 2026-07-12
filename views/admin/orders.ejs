@@ -80,6 +80,11 @@
                   <input type="hidden" name="status" value="in_delivery" />
                   <button class="btn btn-primary btn-sm">Send to Delivery →</button>
                 </form>
+                <form action="/admin/orders/<%= o.id %>/status" method="post"
+                      onsubmit="return confirm('Cancel order #<%= o.id %>? This cannot be undone from here.')">
+                  <input type="hidden" name="status" value="cancelled" />
+                  <button class="btn btn-danger btn-sm">Cancel ✕</button>
+                </form>
               <% } else if (o.status === 'in_delivery') { %>
                 <form action="/admin/orders/<%= o.id %>/status" method="post" class="flex">
                   <input type="hidden" name="status" value="completed" />
@@ -88,6 +93,11 @@
                 <form action="/admin/orders/<%= o.id %>/status" method="post">
                   <input type="hidden" name="status" value="pending" />
                   <button class="btn btn-ghost btn-sm">Revert</button>
+                </form>
+                <form action="/admin/orders/<%= o.id %>/status" method="post"
+                      onsubmit="return confirm('Cancel order #<%= o.id %>? This cannot be undone from here.')">
+                  <input type="hidden" name="status" value="cancelled" />
+                  <button class="btn btn-danger btn-sm">Cancel ✕</button>
                 </form>
               <% } %>
             </footer>

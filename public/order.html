@@ -15,10 +15,10 @@
 <body>
 
   <nav class="navbar" id="navbar">
-    <div class="nav-logo">
+    <a href="index.html" class="nav-logo" aria-label="Living Dairies — Home">
       <img src="img/logo/Logo_Original_Cleaned.png" alt="Living Dairies Logo" class="logo-leaf">
       <img src="img/logo/Text_Logo_Attached_About_Cleaned2.png" alt="Living Dairies" class="logo-text">
-    </div>
+    </a>
     <ul class="nav-links">
       <li><a href="index.html">Home</a></li>
       <li><a href="order.html" class="active">Order Online</a></li>
@@ -92,6 +92,11 @@
         </div>
 
         <div class="shop-form-row">
+          <label for="email">Email (optional — get order confirmation)</label>
+          <input type="email" id="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="shop-form-row">
           <label for="address">Delivery Address</label>
           <textarea id="address" rows="3" placeholder="House #, Street, Area, Lahore" required></textarea>
         </div>
@@ -128,9 +133,9 @@
   <footer class="site-footer">
     <div class="footer-top">
       <div class="footer-brand">
-        <div class="footer-logo"><img src="img/logo/Logo_Original_Cleaned.png" alt="Living Dairies Logo"
+        <a href="index.html" class="footer-logo" aria-label="Living Dairies — Home"><img src="img/logo/Logo_Original_Cleaned.png" alt="Living Dairies Logo"
             class="logo-leaf"><img src="img/logo/Text_Logo_Attached_About_Cleaned2.png" alt="Living Dairies"
-            class="logo-text"></div>
+            class="logo-text"></a>
         <p class="footer-tagline">Pure from the Pasture.<br>Trusted at the Table.</p>
       </div>
       <div class="footer-links-col">
@@ -153,7 +158,7 @@
       </div>
     </div>
     <div class="footer-bottom">
-      <p>© 2026 Living Dairies Ltd. All Rights Reserved. | Lahore, Pakistan</p>
+      <p>© 2026 Living Dairies Private Limited. All Rights Reserved. | Lahore, Pakistan</p>
     </div>
   </footer>
 
@@ -255,6 +260,7 @@
         name: document.getElementById('name').value.trim(),
         phone: document.getElementById('phone').value.trim(),
         address: document.getElementById('address').value.trim(),
+        email: document.getElementById('email').value.trim() || null,
         notes: document.getElementById('notes').value.trim() || null,
       };
 
