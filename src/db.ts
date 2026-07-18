@@ -207,8 +207,19 @@ if (adminCount === 0) {
   const username = process.env.ADMIN_USERNAME || 'admin';
   const password = process.env.ADMIN_PASSWORD || 'dairies123';
   const hash = bcrypt.hashSync(password, 10);
-  db.prepare('INSERT INTO admins (username, password_hash) VALUES (?, ?)').run(username, hash);
-  console.log(`✓ Seeded admin user "${username}" (CHANGE PASSWORD IN PRODUCTION!)`);
+  db.prepare("INSERT INTO admins (username, password_hash, role) VALUES (?, ?, 'super')").run(username, hash);
+  console.log(`✓ Seeded super admin "${username}" (CHANGE PASSWORD IN PRODUCTION!)`);
+}
+
+// Safety net: if no super admin exists (e.g. DB created before roles existed),
+// promote the oldest active admin. Runs after seeding so fresh DBs are covered too.
+const superCheck = (db.prepare("SELECT COUNT(*) as c FROM admins WHERE role = 'super'").get() as { c: number }).c;
+if (superCheck === 0) {
+  const oldest = db.prepare('SELECT id, username FROM admins ORDER BY id ASC LIMIT 1').get() as { id: number; username: string } | undefined;
+  if (oldest) {
+    db.prepare("UPDATE admins SET role = 'super', active = 1 WHERE id = ?").run(oldest.id);
+    console.log(`✓ Migration: "${oldest.username}" promoted to super admin`);
+  }
 }
 
 // ============= QUERIES =============
