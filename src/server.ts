@@ -2,6 +2,12 @@ import 'dotenv/config';
 import express from 'express';
 import session from 'express-session';
 import path from 'path';
+import Database from 'better-sqlite3';
+
+// SQLite-backed session store: sessions survive restarts/redeploys (stored in data/)
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const SqliteStore = require('better-sqlite3-session-store')(session);
+const sessionDb = new Database(path.join(__dirname, '..', 'data', 'sessions.db'));
 
 import apiRoutes from './routes/api';
 import adminRoutes from './routes/admin';
@@ -18,6 +24,10 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use(
   session({
+    store: new SqliteStore({
+      client: sessionDb,
+      expired: { clear: true, intervalMs: 15 * 60 * 1000 }, // purge expired sessions every 15 min
+    }),
     secret: process.env.SESSION_SECRET || 'dev-secret-change-me',
     resave: false,
     saveUninitialized: false,
