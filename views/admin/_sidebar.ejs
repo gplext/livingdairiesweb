@@ -1,11 +1,11 @@
 <aside class="sidebar">
-  <div class="sidebar-brand">
+  <a href="/admin" class="sidebar-brand" style="text-decoration:none;color:inherit;">
     <img src="/images/logo.jpg" alt="Living Dairies" class="sidebar-logo" />
     <div>
       <div class="sidebar-title">Living Dairies</div>
       <div class="sidebar-sub">Admin Console</div>
     </div>
-  </div>
+  </a>
 
   <nav class="sidebar-nav">
     <div class="nav-section">Overview</div>
@@ -25,6 +25,16 @@
     <a href="/admin/products" class="nav-item <%= page === 'products' ? 'active' : '' %>">
       <span class="dot dot-red"></span> Products
     </a>
+
+    <div class="nav-section">Settings</div>
+    <a href="/admin/notifications" class="nav-item <%= page === 'notifications' ? 'active' : '' %>">
+      <span class="dot dot-blue"></span> Notifications
+    </a>
+    <% if (typeof adminRole !== 'undefined' && adminRole === 'super') { %>
+      <a href="/admin/users" class="nav-item <%= page === 'users' ? 'active' : '' %>">
+        <span class="dot dot-red"></span> Admin Users
+      </a>
+    <% } %>
   </nav>
 
   <div class="sidebar-foot">

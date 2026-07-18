@@ -189,29 +189,189 @@ img {
 /* ============================================================ HERO (HOME) */
 .hero {
   position: relative;
-  min-height: 100vh;
+  /* Same size as inner-page heroes (order online, etc.) */
+  height: 52vh;
+  min-height: 380px;
   display: flex;
   align-items: center;
-  background:
-    linear-gradient(160deg, rgba(27, 67, 50, 0.85) 0%, rgba(45, 106, 79, 0.6) 50%, rgba(201, 168, 76, 0.3) 100%),
-    url('img/Products_MainPage/Hero_Image_BlackCow.jpeg') center/cover no-repeat;
+  background: var(--green-deep);
   overflow: hidden;
-  padding: 100px 0;
+  margin-top: 72px;
+}
+
+/* Blurred full-width photo backdrop */
+.hero::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: url('img/Products_MainPage/Hero_Cows_Farm.jpg') center / cover no-repeat;
+  filter: brightness(0.55);
+  transform: scale(1.05);
+  z-index: 0;
 }
 
 .hero-overlay {
   position: absolute;
   inset: 0;
-  background: radial-gradient(ellipse at 20% 50%, rgba(27, 67, 50, 0.7) 0%, transparent 70%);
+  z-index: 1;
+  /* Light gradient only near the bottom so the photo stays clear */
+  background: linear-gradient(to top, rgba(27, 67, 50, 0.75) 0%, rgba(27, 67, 50, 0.25) 35%, transparent 60%);
+}
+
+/* Centered hero: est line above the logo */
+.hero-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 18px;
+  width: 100%;
+  text-align: center;
+}
+
+/* Gold pill badge, same style as inner-page heroes (e.g. Order Online) */
+.hero-est {
+  display: inline-block;
+  font-size: 0.75rem;
+  letter-spacing: 3px;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 6px 14px;
+  border-radius: 50px;
+  color: var(--gold-light);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  background: rgba(201, 168, 76, 0.1);
+}
+
+/* Dull frosted panel behind the logo so it shows clearly on any background */
+.hero-logo-panel {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  padding: 24px 32px;
+  background: rgba(27, 67, 50, 0.5);
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 16px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+}
+
+.hero-logo-panel .hero-logo-img {
+  height: clamp(110px, 14vw, 170px);
+}
+
+.hero-logo-panel .hero-logo-txt {
+  height: clamp(26px, 4vw, 42px);
+}
+
+/* Intro strip below the hero (text moved down, before board message) */
+.hero-intro {
+  background: var(--cream-dark);
+  padding: 48px 5%;
+  text-align: center;
+}
+
+.hero-intro-container {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.hero-intro-title {
+  font-family: var(--shop-font-display);
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  margin-bottom: 14px;
+}
+
+.hi-living {
+  color: #111;
+}
+
+/* About page headline */
+.board-intro .hero-intro-title {
+  font-size: clamp(1.7rem, 3.2vw, 2.6rem);
+  margin-bottom: 14px;
+}
+
+.bi-subtext {
+  max-width: 820px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.hi-dairies {
+  color: #c0392b;
+  font-style: italic;
+}
+
+.hero-intro-text {
+  font-family: var(--shop-font-body);
+  font-size: clamp(0.95rem, 1.6vw, 1.25rem);
+  line-height: 1.6;
+  color: #111;
+  white-space: nowrap;
+}
+
+.hero-intro-actions {
+  justify-content: center;
+  margin-top: 26px;
+}
+
+/* Dark outline button for light backgrounds */
+.shop-btn-outline-dark {
+  background: transparent;
+  color: #111;
+  border: 1px solid rgba(0, 0, 0, 0.45);
+}
+
+.shop-btn-outline-dark:hover {
+  background: var(--green-deep);
+  color: var(--white);
+  border-color: var(--green-deep);
+}
+
+@media (max-width: 760px) {
+  .hero-intro-text {
+    white-space: normal;
+  }
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 36px;
+    text-align: center;
+  }
+
+  .hero-text-col {
+    text-align: center;
+    order: 2;
+  }
+
+  .hero-logo-col {
+    order: 1;
+  }
+
+  .hero-logo-panel {
+    padding: 24px 30px;
+  }
+
+  .hero-logo-panel .hero-logo-img {
+    height: clamp(140px, 30vw, 220px);
+  }
+
+  .shop-hero-actions {
+    justify-content: center;
+  }
 }
 
 .hero-content {
   position: relative;
   z-index: 2;
-  padding: 0 5%;
-  max-width: 1200px;
+  padding: 0 8%;
   width: 100%;
-  margin: 0 auto;
   animation: fadeUp 1s ease forwards;
 }
 
@@ -266,8 +426,7 @@ img {
 .hero-scroll-hint {
   position: absolute;
   bottom: 36px;
-  left: 50%;
-  transform: translateX(-50%);
+  right: 36px;
   color: rgba(255, 255, 255, 0.5);
   font-size: 0.8rem;
   letter-spacing: 2px;
@@ -1709,6 +1868,13 @@ img {
   line-height: 0.95;
   letter-spacing: -0.03em;
   margin-bottom: 32px;
+}
+
+/* Smaller heading on the About page (longer sentence than other pages) */
+.shop-page-header .shop-page-title.about-title,
+.about-page-title {
+  font-size: clamp(2rem, 4.5vw, 3.4rem);
+  line-height: 1.1;
 }
 
 .shop-page-lede {

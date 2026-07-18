@@ -37,6 +37,7 @@
                 <th>Product</th>
                 <th class="num">Qty</th>
                 <th class="num">Total</th>
+                <th>Status</th>
               </tr>
             </thead>
             <tbody>
@@ -49,6 +50,11 @@
                   <td><%= o.product_name %></td>
                   <td class="num"><%= o.quantity %> L</td>
                   <td class="num"><strong>Rs <%= Math.round(o.total_price).toLocaleString() %></strong></td>
+                  <td>
+                    <span class="status-pill status-<%= o.status %>">
+                      <%= o.status === 'cancelled' ? 'Cancelled' : 'Completed' %>
+                    </span>
+                  </td>
                 </tr>
               <% }) %>
             </tbody>

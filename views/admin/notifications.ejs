@@ -1,0 +1,145 @@
+<% const title = 'Notifications' %>
+<%- include('_head', { title }) %>
+<body>
+
+<div class="layout">
+  <%- include('_sidebar') %>
+
+  <main class="main">
+    <header class="page-head">
+      <div>
+        <span class="eyebrow">— Settings</span>
+        <h1 class="page-h1">Order Notifications</h1>
+      </div>
+      <div class="page-head-meta">
+        <form action="/admin/notifications/test" method="post">
+          <button type="submit" class="btn btn-primary">Send Test Email</button>
+        </form>
+      </div>
+    </header>
+
+    <%- include('_flash', { flash: typeof flash !== 'undefined' ? flash : null }) %>
+
+    <div class="two-col">
+      <!-- Recipient list -->
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">— Who gets alerted</span>
+            <h2 class="panel-title">Notification recipients</h2>
+          </div>
+        </div>
+
+        <% if (recipients.length === 0) { %>
+          <div class="empty">
+            <div class="empty-icon">📭</div>
+            <% if (fallbackEmail) { %>
+              <p>No recipients yet — alerts currently go to the fallback address from .env:<br><b><%= fallbackEmail %></b></p>
+            <% } else { %>
+              <p>No recipients configured — <b>order alerts are OFF</b>. Add an email →</p>
+            <% } %>
+          </div>
+        <% } else { %>
+          <div class="product-list">
+            <% recipients.forEach(function(r) { %>
+              <div class="product-row">
+                <div class="product-meta">
+                  <div class="product-name">
+                    <%= r.email %>
+                    <% if (!r.active) { %><span class="muted" style="font-weight:normal;font-size:0.85em;"> — paused</span><% } %>
+                  </div>
+                  <% if (r.label) { %><div class="product-desc"><%= r.label %></div><% } %>
+                  <div class="product-id">Added: <%= r.created_at %></div>
+                </div>
+                <form action="/admin/notifications/emails/<%= r.id %>/toggle" method="post">
+                  <button type="submit" class="btn-icon" title="<%= r.active ? 'Pause alerts for this email' : 'Resume alerts for this email' %>">
+                    <%= r.active ? '⏸' : '▶' %>
+                  </button>
+                </form>
+                <form action="/admin/notifications/emails/<%= r.id %>/delete" method="post"
+                      onsubmit="return confirm('Remove <%= r.email %> from order alerts?')">
+                  <button type="submit" class="btn-icon btn-danger" title="Remove recipient">✕</button>
+                </form>
+              </div>
+            <% }) %>
+          </div>
+        <% } %>
+
+        <div class="panel-head" style="margin-top:24px;">
+          <div>
+            <span class="eyebrow">— Add recipient</span>
+          </div>
+        </div>
+        <form action="/admin/notifications/emails/add" method="post" class="form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">Email address</label>
+              <input type="email" name="email" id="email" placeholder="owner@example.com" required />
+            </div>
+            <div class="form-group">
+              <label for="label">Label (optional)</label>
+              <input type="text" name="label" id="label" placeholder="e.g. Farm Manager" />
+            </div>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Add to Alert List →</button>
+        </form>
+      </section>
+
+      <!-- SMTP settings -->
+      <section class="panel">
+        <div class="panel-head">
+          <div>
+            <span class="eyebrow">— Sending account</span>
+            <h2 class="panel-title">SMTP settings</h2>
+          </div>
+        </div>
+
+        <form action="/admin/notifications/smtp" method="post" class="form">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="smtp_host">SMTP Host</label>
+              <input type="text" name="smtp_host" id="smtp_host" placeholder="smtp.gmail.com"
+                     value="<%= smtp.host %>" />
+            </div>
+            <div class="form-group">
+              <label for="smtp_port">Port</label>
+              <input type="number" name="smtp_port" id="smtp_port" placeholder="587"
+                     value="<%= smtp.port %>" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="smtp_user">SMTP Username (sending email)</label>
+            <input type="text" name="smtp_user" id="smtp_user" placeholder="yourshop@gmail.com"
+                   value="<%= smtp.user %>" />
+          </div>
+          <div class="form-group">
+            <label for="smtp_pass">SMTP Password / App Password</label>
+            <input type="password" name="smtp_pass" id="smtp_pass"
+                   placeholder="<%= smtp.pass ? 'Leave blank to keep current password' : 'e.g. Gmail app password' %>" />
+            <small class="hint">Leave blank to keep the saved password.</small>
+          </div>
+          <div class="form-group">
+            <label for="mail_from">From address (shown to receivers)</label>
+            <input type="text" name="mail_from" id="mail_from" placeholder="Living Dairies &lt;yourshop@gmail.com&gt;"
+                   value="<%= smtp.from %>" />
+          </div>
+          <div class="form-group">
+            <label style="display:flex;align-items:center;gap:8px;font-weight:normal;">
+              <input type="checkbox" name="smtp_secure" <%= smtp.secure ? 'checked' : '' %> style="width:auto;" />
+              Use SSL (port 465). Leave off for port 587 (STARTTLS).
+            </label>
+          </div>
+          <button type="submit" class="btn btn-primary btn-block">Save SMTP Settings →</button>
+          <small class="hint" style="display:block;margin-top:10px;">
+            Common setups — Gmail: smtp.gmail.com, port 587, app password.
+            Brevo: smtp-relay.brevo.com, port 587, SMTP key.
+            After saving, use "Send Test Email" (top right) to verify.
+          </small>
+        </form>
+      </section>
+    </div>
+  </main>
+</div>
+
+</body>
+</html>
