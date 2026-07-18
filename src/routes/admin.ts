@@ -340,6 +340,8 @@ router.post('/notifications/smtp', requireAdmin, (req, res) => {
   if (smtp_pass && String(smtp_pass).trim() && String(smtp_pass).trim() !== '********') {
     queries.setSetting('smtp_pass', String(smtp_pass).trim());
   }
+  // Remove any previously saved Brevo key (feature reverted — SMTP only)
+  queries.deleteSetting('brevo_api_key');
 
   req.session.flash = { type: 'success', message: 'SMTP settings saved — send a test email to verify' };
   res.redirect('/admin/notifications');
