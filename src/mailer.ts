@@ -75,7 +75,10 @@ function buildTransporter(c: SmtpConfig): Transporter {
     port: c.port,
     secure: c.secure,
     auth: c.user ? { user: c.user, pass: c.pass } : undefined,
-  });
+    // Force IPv4: many Docker/VPS environments have no IPv6 route (ENETUNREACH)
+    family: 4,
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  } as any);
 }
 
 function sleep(ms: number): Promise<void> {
