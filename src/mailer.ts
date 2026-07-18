@@ -1,5 +1,6 @@
 import nodemailer from 'nodemailer';
 import type { Transporter } from 'nodemailer';
+import { promises as dns } from 'dns';
 import { queries } from './db';
 
 /**
@@ -68,17 +69,29 @@ export function isMailEnabled(): boolean {
   return Boolean(getSmtpConfig().host && getRecipients().length > 0);
 }
 
-/** Fresh transporter per call so admin-panel changes apply instantly. */
-function buildTransporter(c: SmtpConfig): Transporter {
+/** Resolve a hostname to its IPv4 address (Docker/VPS often has no IPv6 route). */
+async function resolveIPv4(host: string): Promise<string> {
+  if (/^\d{1,3}(\.\d{1,3}){3}$/.test(host)) return host; // already an IP
+  try {
+    const addrs = await dns.resolve4(host);
+    return addrs[0] || host;
+  } catch {
+    return host; // fall back to normal resolution
+  }
+}
+
+/** Fresh transporter per call so admin-panel changes apply instantly.
+ *  Connects to the resolved IPv4 address directly, with TLS servername kept
+ *  as the original hostname so certificate validation still passes. */
+async function buildTransporter(c: SmtpConfig): Promise<Transporter> {
+  const ipv4 = await resolveIPv4(c.host);
   return nodemailer.createTransport({
-    host: c.host,
+    host: ipv4,
     port: c.port,
     secure: c.secure,
     auth: c.user ? { user: c.user, pass: c.pass } : undefined,
-    // Force IPv4: many Docker/VPS environments have no IPv6 route (ENETUNREACH)
-    family: 4,
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  } as any);
+    tls: { servername: c.host },
+  });
 }
 
 function sleep(ms: number): Promise<void> {
@@ -86,10 +99,10 @@ function sleep(ms: number): Promise<void> {
 }
 
 async function sendWithRetry(mail: nodemailer.SendMailOptions): Promise<void> {
-  const transporter = buildTransporter(getSmtpConfig());
   let lastErr: unknown;
   for (let attempt = 1; attempt <= RETRIES; attempt++) {
     try {
+      const transporter = await buildTransporter(getSmtpConfig());
       await transporter.sendMail(mail);
       return;
     } catch (err) {
