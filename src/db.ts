@@ -10,7 +10,9 @@ if (!fs.existsSync(DB_DIR)) fs.mkdirSync(DB_DIR, { recursive: true });
 
 export const db = new Database(DB_PATH);
 db.pragma('journal_mode = WAL');
+db.pragma('synchronous = NORMAL'); // recommended pairing with WAL: fast, still durable
 db.pragma('foreign_keys = ON');
+db.pragma('wal_checkpoint(TRUNCATE)'); // fold WAL back into the main DB at startup
 
 // ============= TYPES =============
 export interface Product {

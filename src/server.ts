@@ -54,6 +54,18 @@ app.use((_req, res) => {
   res.status(404).send('Not found');
 });
 
+// Graceful shutdown: close DB connections cleanly so redeploys/restarts
+// can never interrupt SQLite mid-write.
+import { db as mainDb } from './db';
+function shutdown(signal: string) {
+  console.log(`${signal} received — closing database connections…`);
+  try { mainDb.close(); } catch { /* already closed */ }
+  try { sessionDb.close(); } catch { /* already closed */ }
+  process.exit(0);
+}
+process.on('SIGTERM', () => shutdown('SIGTERM'));
+process.on('SIGINT', () => shutdown('SIGINT'));
+
 app.listen(PORT, () => {
   console.log('');
   console.log('Living Dairies');
