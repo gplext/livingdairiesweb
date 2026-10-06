@@ -110,6 +110,12 @@
           <input type="text" id="notes" placeholder="e.g. Leave at the gate" />
         </div>
 
+        <!-- Spam trap: customers never see this field. Bots fill it in and the server rejects them. -->
+        <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+          <label for="website">Website</label>
+          <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+        </div>
+
         <div class="shop-order-summary">
           <div class="shop-summary-row">
             <span>Subtotal</span>
@@ -252,6 +258,37 @@
       update();
     });
 
+    // ---- Spam protection ----
+    // The server only accepts orders that carry a token it issued to this page.
+    let formToken = null;
+    async function loadFormToken() {
+      try {
+        const res = await fetch('/api/form-token');
+        formToken = (await res.json()).token;
+      } catch (e) {
+        formToken = null;
+      }
+    }
+
+    async function sendOrder(payload, isRetry) {
+      const res = await fetch('/api/orders', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ...payload, token: formToken }),
+      });
+      const data = await res.json();
+      // Token missing or no longer valid (e.g. it failed to load): fetch a new one and retry once.
+      if (data.code === 'token' && !isRetry) {
+        await loadFormToken();
+        await new Promise((resolve) => setTimeout(resolve, 3500));
+        return sendOrder(payload, true);
+      }
+      if (!res.ok || !data.ok) {
+        throw new Error(data.error || 'Failed to place order');
+      }
+      return data;
+    }
+
     document.getElementById('orderForm').addEventListener('submit', async (e) => {
       e.preventDefault();
       errEl.style.display = 'none';
@@ -266,18 +303,11 @@
         address: document.getElementById('address').value.trim(),
         email: document.getElementById('email').value.trim() || null,
         notes: document.getElementById('notes').value.trim() || null,
+        website: document.getElementById('website').value, // spam trap, empty for real customers
       };
 
       try {
-        const res = await fetch('/api/orders', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify(payload),
-        });
-        const data = await res.json();
-        if (!res.ok || !data.ok) {
-          throw new Error(data.error || 'Failed to place order');
-        }
+        const data = await sendOrder(payload);
         window.location.href = `/thankyou.html?id=${data.orderId}&total=${data.total}`;
       } catch (err) {
         errEl.textContent = err.message;
@@ -288,6 +318,7 @@
     });
 
     loadProducts();
+    loadFormToken();
   </script>
 </body>
 

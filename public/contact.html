@@ -115,6 +115,11 @@
             <textarea id="cf-message" name="message" rows="5" placeholder="Write your message here…"
               required></textarea>
           </div>
+          <!-- Spam trap: visitors never see this field. Bots fill it in and the server rejects them. -->
+          <div style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden;" aria-hidden="true">
+            <label for="cf-website">Website</label>
+            <input type="text" id="cf-website" name="website" tabindex="-1" autocomplete="off">
+          </div>
           <button type="submit" class="btn-primary">Send Message ✉️</button>
           <p class="form-success" id="formSuccess">✅ Thank you! Your message has been sent. We'll be in touch soon.</p>
         </form>
@@ -197,6 +202,47 @@
 
   <script src="script.js"></script>
   <script>
+    // ---- Spam protection ----
+    // Our server only accepts messages that carry a token it issued to this page.
+    let formToken = null;
+    async function loadFormToken() {
+      try {
+        const res = await fetch('/api/form-token');
+        formToken = (await res.json()).token;
+      } catch (e) {
+        formToken = null;
+      }
+    }
+
+    // Our own server checks the message for spam, then emails the admin notification list.
+    async function sendToServer(data, isRetry) {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          ...data,
+          website: document.getElementById('cf-website').value, // spam trap, empty for real visitors
+          token: formToken
+        })
+      });
+      const result = await res.json();
+      // Token missing or no longer valid (e.g. it failed to load): fetch a new one and retry once.
+      if (result.code === 'token' && !isRetry) {
+        await loadFormToken();
+        await new Promise((resolve) => setTimeout(resolve, 3500));
+        return sendToServer(data, true);
+      }
+      return result;
+    }
+
+    function sendToFormspree(data) {
+      return fetch('https://formspree.io/f/mvzlvqwa', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
+        body: JSON.stringify(data)
+      });
+    }
+
     async function submitForm() {
       const name = document.getElementById('cf-name').value;
       const message = document.getElementById('cf-message').value;
@@ -214,23 +260,41 @@
         subject: document.getElementById('cf-subject').value,
         message: document.getElementById('cf-message').value
       };
-      // Also forward to our own server, which emails the admin notification list.
-      // Fire-and-forget: Formspree remains the primary submission.
-      fetch('/api/contact', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(data)
-      }).catch(() => { /* ignore - Formspree is the fallback */ });
 
       try {
-        const res = await fetch('https://formspree.io/f/mvzlvqwa', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json', 'Accept': 'application/json' },
-          body: JSON.stringify(data)
-        });
-        if (res.ok) {
+        let sent = false;
+        let result = null;
+        try {
+          result = await sendToServer(data);
+        } catch (e) {
+          // Our server could not be reached: Formspree is the fallback.
+          sent = (await sendToFormspree(data)).ok;
+        }
+        if (result && result.ok) {
+          sent = true;
+          // Formspree keeps a second copy. Only messages that passed our spam check get this far.
+          sendToFormspree(data).catch(() => { /* backup copy only */ });
+        }
+        if (sent) {
           document.getElementById('formSuccess').style.display = 'block';
           document.getElementById('contactForm').reset();
         } else {
-          alert('Something went wrong. Please try again.');
+          alert((result && result.error) || 'Something went wrong. Please try again.');
         }
+      } catch (e) {
+        alert('Network error. Please check your connection and try again.');
+      }
+      btn.textContent = 'Send Message ✉️';
+      btn.disabled = false;
+    }
+
+    document.querySelector('#contactForm .btn-primary').addEventListener('click', function (e) {
+      e.preventDefault();
+      submitForm();
+    });
+
+    loadFormToken();
+  </script>
+</body>
+
+</html>

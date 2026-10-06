@@ -114,9 +114,16 @@ async function sendWithRetry(mail: nodemailer.SendMailOptions): Promise<void> {
   throw lastErr;
 }
 
+/** Text typed by visitors must be escaped before it goes into an HTML email,
+ *  otherwise a spammer can put their own links and markup into our mail. */
+function esc(value: string): string {
+  const entities: Record<string, string> = { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' };
+  return value.replace(/[&<>"']/g, (ch) => entities[ch]);
+}
+
 function orderSummaryHtml(o: OrderEmailData): string {
   const row = (label: string, value: string) =>
-    `<tr><td style="padding:6px 12px;color:#555;">${label}</td><td style="padding:6px 12px;font-weight:600;">${value}</td></tr>`;
+    `<tr><td style="padding:6px 12px;color:#555;">${label}</td><td style="padding:6px 12px;font-weight:600;">${esc(value)}</td></tr>`;
   return `
     <table style="border-collapse:collapse;font-family:Arial,sans-serif;font-size:14px;border:1px solid #ddd;">
       ${row('Order #', String(o.orderId))}
@@ -160,7 +167,7 @@ export async function sendCustomerConfirmation(o: OrderEmailData): Promise<void>
     to: o.customerEmail,
     subject: `Your Living Dairies order #${o.orderId} is confirmed`,
     html: `
-      <h2 style="font-family:Arial,sans-serif;">Thank you, ${o.customerName}!</h2>
+      <h2 style="font-family:Arial,sans-serif;">Thank you, ${esc(o.customerName)}!</h2>
       <p style="font-family:Arial,sans-serif;font-size:14px;">
         Your order has been received. We'll deliver it fresh to your doorstep.
       </p>
@@ -185,7 +192,7 @@ export async function sendContactMessage(m: ContactMessageData): Promise<void> {
   if (recipients.length === 0) throw new Error('No notification recipients configured');
   const c = getSmtpConfig();
   const row = (label: string, value: string) =>
-    `<tr><td style="padding:6px 12px;color:#555;">${label}</td><td style="padding:6px 12px;font-weight:600;">${value}</td></tr>`;
+    `<tr><td style="padding:6px 12px;color:#555;">${label}</td><td style="padding:6px 12px;font-weight:600;">${esc(value)}</td></tr>`;
   await sendWithRetry({
     from: c.from,
     to: c.from,
@@ -200,7 +207,7 @@ export async function sendContactMessage(m: ContactMessageData): Promise<void> {
         ${m.email ? row('Email', m.email) : ''}
         ${row('Subject', m.subject || 'General Enquiry')}
       </table>
-      <p style="font-family:Arial,sans-serif;font-size:14px;white-space:pre-wrap;border-left:3px solid #1b4332;padding-left:12px;margin-top:16px;">${m.message}</p>`,
+      <p style="font-family:Arial,sans-serif;font-size:14px;white-space:pre-wrap;border-left:3px solid #1b4332;padding-left:12px;margin-top:16px;">${esc(m.message)}</p>`,
   });
 }
 

@@ -18,6 +18,10 @@ import './db';
 const app = express();
 const PORT = parseInt(process.env.PORT || '3000');
 
+// The live site sits behind one reverse proxy (Coolify/Traefik). Trusting it makes
+// req.ip the visitor's real address, which the per-IP spam limits rely on.
+app.set('trust proxy', 1);
+
 // ============= MIDDLEWARE =============
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
